@@ -1,0 +1,45 @@
+---
+# tasks file for centos-Elasticsearch
+
+- name: Download Elasticsearch with rpm
+  rpm_key:
+    state: present
+    key: https://artifacts.elastic.co/GPG-KEY-elasticsearch
+
+- name: Copy elasticsearch.repo config file
+  copy:
+    src: config_files/elasticsearch.repo
+    dest: /etc/yum.repos.d/elasticsearch.repo
+
+- name: DNF update all packages
+  dnf:
+    name: "*"
+    state: latest
+
+- name: Install elasticsearch using dnf
+  dnf:
+    name: elasticsearch
+    state: present
+
+- name: Configure network.host in elasticsearch.yml
+  replace:
+    path: /etc/elasticsearch/elasticsearch.yml
+    regexp: '.network.host:(.*)$'
+    replace: 'network.host: localhost'
+                        
+- name: Configure http.port in elasticsearch
+  replace:
+    path: /etc/elasticsearch/elasticsearch.yml
+    regexp: '.http.port:(.*)$'
+    replace: 'http.port: 9200'
+
+- name: Start elasticsearch
+  systemd:
+    state: started
+    name: elasticsearch
+    enabled: yes
+
+    #- name: Check elasticsearch if up
+    # uri:
+    #   url: localhost:9200
+    #    method: GET

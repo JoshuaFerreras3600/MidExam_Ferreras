@@ -1,0 +1,7 @@
+[servers]
+192.168.100.143 ansible_ssh_pass=lilpogi123 ansible_ssh_user=ferrerasjoshua ansible_sudo_pass=lilpogi123
+192.168.100.154 ansible_ssh_pass=lilpogi123 ansible_ssh_user=ferrerascentos ansible_sudo_pass=lilpogi123
+
+[ELKservers]
+192.168.100.143 ansible_ssh_pass=lilpogi123 ansible_ssh_user=ferrerasjoshua ansible_sudo_pass=lilpogi123
+192.168.100.154 ansible_ssh_pass=lilpogi123 ansible_ssh_user=ferrerascentos ansible_sudo_pass=lilpogi123
