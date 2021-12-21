@@ -55,3 +55,28 @@
       include_role:
         name: centos-Logstash
       when: ansible_distribution == 'CentOS' or ansible_distribution == 'Red Hat Enterprise Linux'
+
+- name: Install Nagious
+  hosts: nagiosservers
+  tasks:
+    - name: Install on Ubuntu
+      include_role: 
+        name: ubuntu-Nagios
+      when: ansible_distribution == 'Debian' or ansible_distribution == 'Ubuntu'
+
+- name: Install Grafana + Prometheus
+  hosts: gpserver
+  tasks:
+    - name: Install grafana on CentOS
+      include_role:
+        name: centos-grafana
+      when: ansible_distribution == 'CentOS' or ansible_distribution == 'Red Hat Enterprise Linux'
+
+    - name: Install prometheus on CentOS
+      include_role:
+        name: centos-prometheus
+      when: ansible_distribution == 'CentOS' or ansible_distribution == 'Red Hat Enterprise Linux'
+
+
+
+
